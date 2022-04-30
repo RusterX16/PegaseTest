@@ -21,6 +21,29 @@ header > * {
     margin: auto 16px;
 }
 
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#last-requests, #today-reminder {
+    text-align: center;
+    margin: 32px 16px;
+    font-size: 12px;
+}
+
+#last-requests th, #today-reminder th {
+    border: 2px black solid;
+    background-color: rgba(164, 164, 164, .7);
+}
+
+#last-requests th, td, #today-reminder th, td {
+    border: 1px black solid;
+}
+
 /*
 Menu
 */
@@ -48,6 +71,7 @@ Menu
 }
 
 .menu li > a > div {
+    cursor: pointer;
     text-align: center;
     padding: 16px;
 }
@@ -178,7 +202,7 @@ SQL
 Responsive
 */
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 550px) {
     #burger {
         display: none;
     }
@@ -189,10 +213,14 @@ Responsive
 
     #admin-horizontal-menu {
         display: none;
+    }
+
+    #last-requests th, td, #today-reminder th, td {
+        padding: 8px 16px;
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
     #burger {
         display: flex;
     }
@@ -203,5 +231,9 @@ Responsive
 
     #admin-horizontal-menu {
         display: none;
+    }
+
+    #last-requests th, td, #today-reminder th, td {
+        padding: 4px 8px;
     }
 }

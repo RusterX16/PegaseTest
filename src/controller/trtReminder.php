@@ -7,7 +7,7 @@ require_once File::build_path([
 ]);
 
 $pdo = Model::getPdo();
-$query = $pdo -> query("SELECT * FROM users");
+$query = $pdo -> query("SELECT * FROM requests");
 $users = $query -> fetchAll(PDO::FETCH_ASSOC);
 $error = false;
 
@@ -21,6 +21,7 @@ if(!preg_match("/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/", $_POST["phone
     $error = true;
 }
 
+/*
 for($i = 0, $size = count($users); $i < $size; $i++) {
     if($users[$i]["email"] === $_POST["email"]) {
         echo "<p>L'email est déjà associée</p>";
@@ -31,13 +32,16 @@ for($i = 0, $size = count($users); $i < $size; $i++) {
         $error = true;
     }
 }
+*/
 
 if($error) {
     echo "<a href='../view/reminder.php'>Revenir au formulaire</a>";
     return;
 }
 
-$query = $pdo -> prepare("INSERT INTO users VALUES (:lastname, :forname, :email, :phone, :timeslot, :reminder)");
+date_default_timezone_set("Europe/Paris");
+
+$query = $pdo -> prepare("INSERT INTO requests(email, forname, lastname, phone, timeslot, reminder) VALUES (:email, :forname, :lastname, :phone, :timeslot, :reminder)");
 $values = [
     "lastname" => $_POST["lastname"],
     "forname" => $_POST["forname"],
