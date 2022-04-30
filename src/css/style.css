@@ -1,0 +1,207 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: rgba(100, 149, 237, 1);
+    font-family: "Calibri", sans-serif;
+    box-shadow: #333 1px 1px 4px 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+header > * {
+    margin: auto 16px;
+}
+
+/*
+Menu
+*/
+
+.menu {
+    font-family: "Calibri", sans-serif;
+}
+
+.menu ul {
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.menu li {
+    list-style: none;
+}
+
+.menu a {
+    text-decoration: none;
+}
+
+.menu a:visited {
+    color: black;
+}
+
+.menu li > a > div {
+    text-align: center;
+    padding: 16px;
+}
+
+#horizontal-menu ul {
+    display: flex;
+    flex-direction: row;
+}
+
+#vertical-menu {
+    background-color: rgba(147, 112, 219, 1);
+    box-shadow: #333 1px 1px 4px 1px;
+    position: absolute;
+    width: 128px;
+    height: 100%;
+    right: -128px;
+    z-index: 2;
+}
+
+#admin-vertical-menu {
+    background-color: rgba(255, 192, 203, 1);
+    box-shadow: #333 1px 1px 4px 1px;
+    position: absolute;
+    width: 128px;
+    height: 100%;
+    right: -128px;
+    z-index: 1;
+}
+
+/*
+Menu Burger
+*/
+
+#burger {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+}
+
+.line {
+    fill: none;
+    stroke: black;
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+
+.line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.opened .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.opened .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+
+.opened .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+/*
+Form
+*/
+
+form {
+    margin: 32px 128px 32px 0;
+}
+
+form legend {
+    margin: 16px 16px;
+}
+
+form fieldset {
+    width: 100%;
+}
+
+/*
+SQL
+*/
+
+.db_tables {
+    margin: 16px;
+}
+
+.db_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.db_ibox {
+    background-color: #a4a4a4;
+    display: flex;
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 8px;
+}
+
+.db_box {
+    display: flex;
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 8px;
+    width: 128px;
+}
+
+/*
+Responsive
+*/
+
+@media screen and (min-width: 500px) {
+    #burger {
+        display: none;
+    }
+
+    #horizontal-menu {
+        display: flex;
+    }
+
+    #admin-horizontal-menu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #burger {
+        display: flex;
+    }
+
+    #horizontal-menu {
+        display: none;
+    }
+
+    #admin-horizontal-menu {
+        display: none;
+    }
+}
