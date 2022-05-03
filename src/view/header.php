@@ -3,7 +3,7 @@
     <div class="menu" id="horizontal-menu">
         <?php include("menu.html"); ?>
     </div>
-    <div class="menu closed" id="admin-horizontal-menu" onclick="toggleAdminHorizontalMenu()">
+    <div class="menu closed" id="admin-horizontal-menu">
         <?php include("admin_menu.html"); ?>
     </div>
     <div onclick="toggle()">

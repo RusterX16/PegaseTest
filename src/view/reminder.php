@@ -18,43 +18,70 @@
             <div class="form-group">
                 <label class="col-md-8 control-label" for="lastname">Nom</label>
                 <div class="col-md-8">
-                    <input required id="lastname" name="lastname" type="text" placeholder="nom" class="form-control input-md">
+                    <input required id="lastname" name="lastname" type="text" placeholder="nom"
+                           class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="forname">Prénom</label>
                 <div class="col-md-8">
-                    <input required id="forname" name="forname" type="text" placeholder="prenom" class="form-control input-md">
+                    <input required id="forname" name="forname" type="text" placeholder="prenom"
+                           class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="email">Email</label>
                 <div class="col-md-8">
-                    <input required id="email" name="email" type="text" placeholder="email" class="form-control input-md">
+                    <input required id="email" name="email" type="text" placeholder="email"
+                           pattern="/^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/" class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="phone">Téléphone</label>
                 <div class="col-md-8">
-                    <input required id="phone" name="phone" type="number" placeholder="téléphone" class="form-control input-md">
+                    <input required id="phone" name="phone" type="number" placeholder="téléphone"
+                           pattern="/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/" class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="timeslot">Créneau</label>
-                <div class="col-md-8">
-                    <input required id="timeslot" name="timeslot" type="datetime-local" placeholder="placeholder" class="form-control input-md">
-                </div>
+                <?php
+                require_once "../lib/File.php";
+                require_once File::build_path([
+                    "model",
+                    "Model.php"
+                ]);
+                $pdo = Model::getPdo();
+                $query = $pdo -> query("SELECT * FROM timeslot");
+                $timeslots = $query -> fetchAll(PDO::FETCH_ASSOC);
+                $out = "<div style='margin-left: 32px'>";
+
+                for($i = 0, $size = count($timeslots); $i < $size; $i++) {
+                    $item = $timeslots[$i];
+
+                    if(!$item["activated"]) {
+                        continue;
+                    }
+                    $out .= "<div class='timeslot-option'>
+                        <input id=op$i' name='timeslot' type='radio'>
+                        <label for='op$i'>{$item['label']}</label>
+                        </div>";
+                }
+                echo $out . "</div>";
+                ?>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="reminder">Date de rappel</label>
                 <div class="col-md-8">
-                    <input required id="reminder" name="reminder" type="date" placeholder="placeholder" class="form-control input-md">
+                    <input required id="reminder" name="reminder" type="date" placeholder="placeholder"
+                           class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-8 control-label" for="message">Message</label>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="message" name="message" placeholder="Écrivez un commentaire"></textarea>
+                    <textarea class="form-control" id="message" name="message"
+                              placeholder="Écrivez un commentaire"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -72,4 +99,3 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script src="../js/script.js" type="text/javascript"></script>
-<script>window.onload = function() { initDate() }</script>
