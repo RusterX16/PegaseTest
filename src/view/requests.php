@@ -14,14 +14,14 @@
 <main>
     <?php
     require_once "../lib/File.php";
-    require_once File ::build_path([
+    require_once File::build_path([
         "model",
         "Model.php"
     ]);
 
-    $pdo = Model ::getPdo();
+    $pdo = Model::getPdo();
     $query = $pdo -> query("SELECT * FROM requests");
-    $requests = $query -> fetchAll(PDO::FETCH_OBJ);
+    $requests = $query -> fetchAll(PDO::FETCH_ASSOC);
     $out = "<div id='last-requests'>
                 <h5>Demandes de rappel enregistrées</h5>
                 <table>
@@ -30,21 +30,23 @@
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Téléphone</th>
+                        <th>Date</th>
                         <th>Créneau</th>
-                        <th>Rappel</th>
                     </thead>";
 
     foreach($requests as $item) {
         $out .= "<tr>
-            <td>{$item -> forname}</td>
-            <td>{$item -> lastname}</td>
-            <td>{$item -> email}</td>
-            <td>{$item -> phone}</td>
-            <td>{$item -> timeslot}</td>
-            <td>{$item -> reminder}</td></tr>";
+            <td>{$item['forname']}</td>
+            <td>{$item['lastname']}</td>
+            <td>{$item['email']}</td>
+            <td>{$item['phone']}</td>
+            <td>{$item['reminder']}</td>
+            <td>{$item['start']} - {$item['end']}</td></tr>";
+    }
+    if(empty($requests)) {
+        $out = "<p><em>Aucune demande de rappel enregistrée</em></p>";
     }
     echo $out;
-
     ?>
 </main>
 <footer>

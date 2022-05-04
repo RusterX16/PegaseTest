@@ -155,10 +155,13 @@ function buildOption(field) {
 
     const html = "" +
         "<div id='timeslot-element-" + id + "' class='timeslot-element built'>" +
-            "<input type='text' name='label" + id + "' value='" + document.getElementById("label").value + "' readonly>" +
+            "<input style='width: 120px' type='text' name='label" + id + "' value='" + document.getElementById("label").value + "' readonly>" +
             "<input style='width: 70px' name='start" + id + "' value='" + document.getElementById("start").value + "' readOnly/>" +
             "<input style='width: 70px' name='end" + id + "' value='" + document.getElementById("end").value + "' readOnly/>" +
-            "<input type='checkbox' name='ts" + id + "'/>" +
+            "<label for='activate'>Activer</label>" +
+            "<input id='activate' name='activate$i' type='checkbox'/>" +
+            "<label for='delete'>Supprimer</label>" +
+            "<input id='delete' name='delete$i' value='Supprimer' type='checkbox'/>" +
         "</div>";
     const parent = field.parentNode.parentNode;
 

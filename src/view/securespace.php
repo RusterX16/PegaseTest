@@ -29,10 +29,13 @@
         $item = $timeslots[$i];
         $out .= "
             <div id='timeslot-element-$i' class='timeslot-element built'>
-                <input name='label$i' value='{$item['label']}' readonly/>
+                <input style='width: 120px' name='label$i' value='{$item['label']}' readonly/>
                 <input style='width: 70px' name='start$i' value='{$item['start']}' readonly/>
                 <input style='width: 70px' name='end$i' value='{$item['end']}' readonly/>
-                <input name='ts$i' type='checkbox'/>
+                <label for='activate'>Activer</label>
+                <input id='activate' name='activate$i' type='checkbox'/>
+                <label for='delete'>Supprimer</label>
+                <input id='delete' name='delete$i' value='Supprimer' type='checkbox'/>
             </div>";
     }
     if(empty($out)) {

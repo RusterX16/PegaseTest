@@ -22,7 +22,7 @@
 
     $pdo = Model ::getPdo();
     $query = $pdo -> query("SELECT * FROM requests ORDER BY creationdate DESC");
-    $requests = $query -> fetchAll(PDO::FETCH_OBJ);
+    $requests = $query -> fetchAll(PDO::FETCH_ASSOC);
     $out_last_requests = "<div id='last-requests'>
                 <h5>Derniers enregistrements de rappel</h5>
                 <table>
@@ -31,8 +31,8 @@
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Téléphone</th>
+                        <th>Date</th>
                         <th>Créneau</th>
-                        <th>Rappel</th>
                     </thead>";
     $out_today_reminder = "<div id='today-reminder'>
                 <h5>Rappels du jour</h5>
@@ -42,8 +42,8 @@
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Téléphone</th>
+                        <th>Date</th>
                         <th>Créneau</th>
-                        <th>Rappel</th>
                     </thead>";
     $count_last_requests = 0;
     $count_today_reminder = 0;
@@ -51,29 +51,29 @@
     for($i = 0; $i < min(5, count($requests)); $i++) {
         $item = $requests[$i];
 
-        if($item -> timeslot <= date("Y-m-d H:i:s")) {
+        if($item['reminder'] <= date("Y-m-d H:i:s")) {
             continue;
         }
         $out_last_requests .= "<tr>
-            <td>{$item -> forname}</td>
-            <td>{$item -> lastname}</td>
-            <td>{$item -> email}</td>
-            <td>{$item -> phone}</td>
-            <td>{$item -> timeslot}</td>
-            <td>{$item -> reminder}</td></tr>";
+            <td>{$item['forname']}</td>
+            <td>{$item['lastname']}</td>
+            <td>{$item['email']}</td>
+            <td>{$item['phone']}</td>
+            <td>{$item['reminder']}</td>
+            <td>{$item['start']} - {$item['end']}</td></tr>";
         $count_last_requests++;
     }
     foreach($requests as $item) {
-        if($item -> reminder !== date("Y-m-d")) {
+        if($item['reminder'] !== date("Y-m-d")) {
             continue;
         }
         $out_today_reminder .= "<tr>
-            <td>{$item -> forname}</td>
-            <td>{$item -> lastname}</td>
-            <td>{$item -> email}</td>
-            <td>{$item -> phone}</td>
-            <td>{$item -> timeslot}</td>
-            <td>{$item -> reminder}</td></tr>";
+            <td>{$item['forname']}</td>
+            <td>{$item['lastname']}</td>
+            <td>{$item['email']}</td>
+            <td>{$item['phone']}</td>
+            <td>{$item['reminder']}</td>
+            <td>{$item['start']} - {$item['end']}</td></tr>";
         $count_today_reminder++;
     }
     if($count_last_requests === 0) {

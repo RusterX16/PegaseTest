@@ -12,14 +12,7 @@
 <body>
 <?php include("header.php"); ?>
 <main>
-    <?php
-    require_once "../lib/File.php";
-    require_once File::build_path([
-        "config",
-        "Conf.php"
-    ]);
-    Conf::show_tables();
-    ?>
+    <h4>Page d'accueil</h4>
 </main>
 <footer>
 
