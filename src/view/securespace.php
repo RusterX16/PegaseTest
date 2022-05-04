@@ -20,22 +20,27 @@
         "Model.php"
     ]);
     $pdo = Model::getPdo();
-    $out = "<div><form method='get' action='../controller/trtTimeslot.php' 
+    $out = "<div id='timeslot'><form method='get' action='../controller/trtTimeslot.php' 
         style='display: flex; flex-direction: column; justify-content: center'>";
     $query = $pdo -> query("SELECT * FROM timeslot");
     $timeslots = $query -> fetchAll(PDO::FETCH_ASSOC);
 
     for($i = 0, $size = count($timeslots); $i < $size; $i++) {
         $item = $timeslots[$i];
-        $out .= "<div class='timeslot-element'>
-            <label for='ts" . $i . "'>{$item['label']}</label>
-            <input id='ts" . $i . "' name='ts" . $i . "' type='checkbox'/>
+        $out .= "
+            <div id='timeslot-element-$i' class='timeslot-element built'>
+                <input name='label$i' value='{$item['label']}' readonly/>
+                <input style='width: 70px' name='start$i' value='{$item['start']}' readonly/>
+                <input style='width: 70px' name='end$i' value='{$item['end']}' readonly/>
+                <input name='ts$i' type='checkbox'/>
             </div>";
     }
     if(empty($out)) {
         $out = "<p><em>Aucun créneau existant</em></p>";
     }
-    echo $out . "<input value='Appliquer' type='submit' style='margin: 16px 0'></form></div>";
+    echo $out . "
+        <input id='add' type='button' value='+' onclick='addOption()'/>
+        <input value='Appliquer' type='submit' style='margin: 16px 0'></form></div>";
     ?>
 </main>
 <footer>

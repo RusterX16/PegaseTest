@@ -96,7 +96,7 @@ function toggleHorizontalAdminMenu() {
     } else if(list.contains("open")) {
         list.remove("open");
         list.add("closed");
-        menu.style.top = "-192px";
+        menu.style.top = "-228px";
         menu.style.transitionDuration = ".5s";
     }
 }
@@ -128,6 +128,42 @@ function closeMenu(list, style) {
     list.add("closed");
     style.right = "-128px";
     style.transitionDuration = ".5s";
+}
+
+function addOption() {
+    const add = document.getElementById("add");
+    const id = $(".timeslot-element").length;
+
+    $(add).before("" +
+        "<div id='timeslot-element-" + id + "' class='timeslot-element editing'>" +
+            "<input type='button' value='-' onclick='deleteOption(this)'/>" +
+            "<input id='label' type='text' name='label" + id + "' placeholder='label' required/>" +
+            "<input id='start' type='time' name='start" + id + "' placeholder='heure de début' required/>" +
+            "<input id='end' type='time' name='end" + id + "' placeholder='heure de fin' required/> " +
+            "<input type='submit' value='Ajouter' onclick='buildOption(this)'>" +
+        "</div>"
+    );
+}
+
+function deleteOption(field) {
+    $(field).parent().remove();
+}
+
+function buildOption(field) {
+    let id = $(field).parent().attr("id");
+    id = id.substring(id.length - 1, id.length);
+
+    const html = "" +
+        "<div id='timeslot-element-" + id + "' class='timeslot-element built'>" +
+            "<input type='text' name='label" + id + "' value='" + document.getElementById("label").value + "' readonly>" +
+            "<input style='width: 70px' name='start" + id + "' value='" + document.getElementById("start").value + "' readOnly/>" +
+            "<input style='width: 70px' name='end" + id + "' value='" + document.getElementById("end").value + "' readOnly/>" +
+            "<input type='checkbox' name='ts" + id + "'/>" +
+        "</div>";
+    const parent = field.parentNode.parentNode;
+
+    deleteOption(field);
+    $(parent).children("div :last-child").after(html);
 }
 
 function initDate() {

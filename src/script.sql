@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS timeslot
     end       TIME,
     label     VARCHAR(32) NOT NULL,
     activated BOOL        NOT NULL DEFAULT TRUE,
-    CONSTRAINT pk_timeslot PRIMARY KEY (start, end)
+    CONSTRAINT pk_timeslot PRIMARY KEY (start, end, label)
 );
 
 INSERT INTO timeslot VALUES ('09:00:00', '11:00:00', 'Matin', TRUE);
-INSERT INTO timeslot VALUES ('14:00:00', '16:00:00', 'Après-midi', TRUE);
+INSERT INTO timeslot VALUES ('14:00:00', '16:00:00', 'Apres-Midi', TRUE);

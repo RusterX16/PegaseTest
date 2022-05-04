@@ -32,8 +32,8 @@
             <div class="form-group">
                 <label class="col-md-8 control-label" for="email">Email</label>
                 <div class="col-md-8">
-                    <input required id="email" name="email" type="text" placeholder="email"
-                           pattern="/^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/" class="form-control input-md">
+                    <input required id="email" name="email" type="email" placeholder="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">

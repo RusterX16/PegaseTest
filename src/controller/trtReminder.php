@@ -7,19 +7,19 @@ require_once File::build_path([
 ]);
 
 $pdo = Model::getPdo();
-$query = $pdo -> query("SELECT * FROM requests");
-$users = $query -> fetchAll(PDO::FETCH_ASSOC);
-
 $query = $pdo -> prepare("
-    INSERT INTO requests(email, forname, lastname, phone, timeslot, reminder) 
-    VALUES (:email, :forname, :lastname, :phone, :timeslot, :reminder)
+    INSERT INTO requests(email, forname, lastname, phone, start, end, reminder) 
+    VALUES (:email, :forname, :lastname, :phone, :start, :end, :reminder)
 ");
+
+var_dump($_POST);
+
 $values = [
     "lastname" => $_POST["lastname"],
     "forname" => $_POST["forname"],
     "email" => $_POST["email"],
     "phone" => $_POST["phone"],
-    "timeslot" => $_POST["timeslot"],
+    "start" => $_POST["timeslot"],
     "reminder" => $_POST["reminder"],
 ];
 $query -> execute($values);
