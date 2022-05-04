@@ -5,12 +5,6 @@ require_once File ::build_path([
     "Model.php"
 ]);
 
-/*
-echo "<pre>";
-var_dump($_GET);
-echo "</pre>";
-*/
-
 $pdo = Model ::getPdo();
 
 for($i = 0; true; $i++) {
@@ -31,7 +25,7 @@ for($i = 0; true; $i++) {
             "start" => $_GET["start$i"],
             "end" => $_GET["end$i"],
             "label" => $_GET["label$i"],
-            "activated" => isset($_GET["ts$i"]) ? 1 : 0,
+            "activated" => isset($_GET["activate$i"]) ? 1 : 0,
         ]);
     } else {
         if(isset($_GET["delete$i"])) {
@@ -40,11 +34,11 @@ for($i = 0; true; $i++) {
             $query -> execute([
                 "label" => $_GET["label$i"],
             ]);
-        } else {
+        } else if(isset($_GET["activate$i"])) {
             $sql = "UPDATE timeslot SET activated=:activated WHERE label=:label";
             $query = $pdo -> prepare($sql);
             $query -> execute([
-                "activated" => isset($_GET["activate$i"]) ? 1 : 0,
+                "activated" => 1,
                 "label" => $_GET["label$i"],
             ]);
         }

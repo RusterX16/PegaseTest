@@ -159,9 +159,9 @@ function buildOption(field) {
             "<input style='width: 70px' name='start" + id + "' value='" + document.getElementById("start").value + "' readOnly/>" +
             "<input style='width: 70px' name='end" + id + "' value='" + document.getElementById("end").value + "' readOnly/>" +
             "<label for='activate'>Activer</label>" +
-            "<input id='activate' name='activate$i' type='checkbox'/>" +
+            "<input id='activate' name='activate" + id + "' type='checkbox'/>" +
             "<label for='delete'>Supprimer</label>" +
-            "<input id='delete' name='delete$i' value='Supprimer' type='checkbox'/>" +
+            "<input id='delete' name='delete" + id + "' value='Supprimer' type='checkbox'/>" +
         "</div>";
     const parent = field.parentNode.parentNode;
 
