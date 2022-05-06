@@ -19,7 +19,8 @@ $values = [
     "forname" => $_POST["forname"],
     "email" => $_POST["email"],
     "phone" => $_POST["phone"],
-    "start" => $_POST["timeslot"],
+    "start" => $_POST["start"],
+    "end" => $_POST["end"],
     "reminder" => $_POST["reminder"],
 ];
 $query -> execute($values);

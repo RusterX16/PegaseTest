@@ -63,8 +63,10 @@
                         continue;
                     }
                     $out .= "<div class='timeslot-option'>
-                        <input id=op$i' name='timeslot' type='radio'>
-                        <label for='op$i'>{$item['label']}</label>
+                        <input id=op' type='radio'>
+                        <label for='op'>{$item['label']}</label>
+                        <input size='4px' name='start' type='text' value='{$item['start']}' readonly>
+                        <input size='4px' name='end' type='text' value='{$item['end']}' readonly>
                         </div>";
                 }
                 echo $out . "</div>";
